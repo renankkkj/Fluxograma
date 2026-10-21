@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Preservando a Natureza - Fluxograma Interativo</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2d5016 0%, #4CAF50 100%);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .fluxograma-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 5px solid #4CAF50;
+        }
+
+        .fluxograma-section h2 {
+            color: #2d5016;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .mermaid {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        .explicacao {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 4px solid #FFC107;
+        }
+
+        .explicacao h3 {
+            color: #F57F17;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .etapas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .etapa {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .etapa:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .etapa h4 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .etapa p {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        table th {
+            background: linear-gradient(135deg, #2d5016 0%, #4CAF50 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .praticos {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .praticos h2 {
+            color: #2d5016;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        .exemplo {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid #c2185b;
+        }
+
+        .exemplo h4 {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .conclusao {
+            background: linear-gradient(135deg, #81C784 0%, #2d5016 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.1em;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .emoji {
+            font-size: 1.3em;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .main-content, .praticos {
+                padding: 20px;
+            }
+
+            .etapas {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1><span class="emoji">🤖🌍</span> IA Auxiliando na Preservação da Natureza</h1>
+            <p>Descubra como a Inteligência Artificial pode salvar nosso planeta</p>
+        </header>
+
+        <!-- Conteúdo Principal -->
+        <div class="main-content">
+            <!-- Fluxograma -->
+            <div class="fluxograma-section">
+                <h2><span class="emoji">📊</span> Fluxograma Interativo</h2>
+                <div class="mermaid">
+graph TD
+    A["🤖 Inteligência Artificial"] --> B["Monitoramento Ambiental"]
+    A --> C["Análise de Dados"]
+    A --> D["Tomada de Decisões"]
+    
+    B --> B1["Satélites & Drones<br/>Monitoram florestas"]
+    B --> B2["Câmeras de Vigilância<br/>Detectam desmatamento"]
+    B --> B3["Sensores IoT<br/>Medem qualidade do ar/água"]
+    
+    C --> C1["Processamento de<br/>Imagens de Satélite"]
+    C --> C2["Análise de Padrões<br/>Climáticos"]
+    C --> C3["Previsão de<br/>Desastres Naturais"]
+    
+    B1 --> E["Dados Coletados"]
+    B2 --> E
+    B3 --> E
+    
+    E --> F["Machine Learning<br/>Processa Informações"]
+    
+    C1 --> F
+    C2 --> F
+    C3 --> F
+    
+    F --> D
+    
+    D --> G["Alertas em Tempo Real"]
+    D --> H["Recomendações<br/>de Ações"]
+    D --> I["Otimização de<br/>Recursos"]
+    
+    G --> J["🚨 Notificar Autoridades"]
+    G --> K["⚠️ Avisar Comunidades"]
+    
+    H --> L["🌱 Reflorestamento<br/>Inteligente"]
+    H --> M["🌊 Proteção de<br/>Ecossistemas"]
+    H --> N["🔥 Prevenção de<br/>Incêndios"]
+    
+    I --> O["⚡ Energia Renovável<br/>Otimizada"]
+    I --> P["💧 Gestão de<br/>Recursos Hídricos"]
+    
+    L --> Q["✅ Natureza Preservada"]
+    M --> Q
+    N --> Q
+    O --> Q
+    P --> Q
+    
+    J --> R["🛡️ Ação Humana<br/>Informada"]
+    K --> R
+    
+    R --> Q
+    
+    style A fill:#4CAF50,stroke:#2E7D32,stroke-width:3px,color:#fff
+    style Q fill:#81C784,stroke:#2E7D32,stroke-width:3px,color:#fff
+    style R fill:#FFC107,stroke:#F57F17,stroke-width:2px,color:#000
+                </div>
+            </div>
+
+            <!-- Explicação do Fluxograma -->
+            <div class="explicacao">
+                <h3><span class="emoji">📚</span> Explicação do Fluxograma</h3>
+                
+                <div class="etapas">
+                    <div class="etapa">
+                        <h4>1️⃣ Entrada: IA</h4>
+                        <p>A IA atua em três frentes: Monitoramento Ambiental, Análise de Dados e Tomada de Decisões</p>
+                    </div>
+
+                    <div class="etapa">
+                        <h4>2️⃣ Monitoramento</h4>
+                        <p>Satélites, drones, câmeras de vigilância e sensores IoT coletam dados contínuos</p>
+                    </div>
+
+                    <div class="etapa">
+                        <h4>3️⃣ Processamento</h4>
+                        <p>Machine Learning analisa imagens, padrões climáticos e previne desastres</p>
+                    </div>
+
+                    <div class="etapa">
+                        <h4>4️⃣ Decisão</h4>
+                        <p>Gera alertas, recomendações e otimização de recursos naturais</p>
+                    </div>
+
+                    <div class="etapa">
+                        <h4>5️⃣ Ação Humana</h4>
+                        <p>Autoridades e comunidades agem com informações precisas e em tempo real</p>
+                    </div>
+
+                    <div class="etapa">
+                        <h4>6️⃣ Resultado</h4>
+                        <p>✅ Natureza Preservada através da parceria entre IA e ser humano</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exemplos Práticos -->
+        <div class="praticos">
+            <h2><span class="emoji">💡</span> Exemplos Práticos</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aplicação</th>
+                        <th>IA Utiliza</th>
+                        <th>Benefício</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="emoji">🌲</span> Monitoramento de Florestas</td>
+                        <td>Visão computacional + Satélites</td>
+                        <td>Detectar desmatamento em minutos</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🔥</span> Prevenção de Incêndios</td>
+                        <td>Análise de padrões + Alertas</td>
+                        <td>Reduzir destruição de habitats</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🦁</span> Proteção de Espécies</td>
+                        <td>Reconhecimento de imagem + GPS</td>
+                        <td>Rastrear animais em perigo</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🌱</span> Reflorestamento</td>
+                        <td>Otimização de recursos</td>
+                        <td>Plantar 1000x mais árvores</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🐟</span> Gestão de Pesca</td>
+                        <td>Previsão de estoques</td>
+                        <td>Evitar sobrepesca</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">💨</span> Qualidade do Ar</td>
+                        <td>Sensores + Análise em tempo real</td>
+                        <td>Monitorar poluição atmosférica</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">💧</span> Gestão de Água</td>
+                        <td>Previsão de secas</td>
+                        <td>Usar recursos de forma sustentável</td>
+                    </tr>
+                    <tr>
+                        <td><span class="emoji">🌊</span> Proteção Marinha</td>
+                        <td>Drones subaquáticos + IA</td>
+                        <td>Proteger ecossistemas marinhos</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 30px; margin-bottom: 20px; color: #2d5016;"><span class="emoji">🎯</span> Casos de Uso Destacados</h3>
+
+            <div class="exemplo">
+                <h4><span class="emoji">🛰️</span> Monitoramento de Florestas com Satélites</h4>
+                <p>A IA analisa imagens de satélite para detectar desmatamento ilegal em tempo real, permitindo que autoridades atuem imediatamente.</p>
+            </div>
+
+            <div class="exemplo">
+                <h4><span class="emoji">🔮</span> Previsão de Desastres Naturais</h4>
+                <p>Modelos de machine learning analisam dados meteorológicos para prever furacões, enchentes e secas, salvando vidas e preparando comunidades.</p>
+            </div>
+
+            <div class="exemplo">
+                <h4><span class="emoji">🚁</span> Drones Inteligentes para Reflorestamento</h4>
+                <p>Drones equipados com IA plantam sementes em áreas devastadas 10 vezes mais rápido que humanos, com taxa de sucesso de 95%.</p>
+            </div>
+
+            <div class="exemplo">
+                <h4><span class="emoji">🐾</span> Rastreamento de Espécies em Extinção</h4>
+                <p>Câmeras com reconhecimento facial de animais rastreiam populações em perigo e alertam sobre possíveis colisões com humanos.</p>
+            </div>
+
+            <div class="exemplo">
+                <h4><span class="emoji">⚡</span> Otimização de Energia Renovável</h4>
+                <p>IA prevê padrões climáticos para otimizar a geração de energia solar e eólica, maximizando eficiência sustentável.</p>
+            </div>
+        </div>
+
+        <!-- Conclusão -->
+        <div class="conclusao">
+            <h2><span class="emoji">🌍💚</span> Conclusão</h2>
+            <p>A Inteligência Artificial não substitui o ser humano, mas o capacita a tomar decisões mais rápidas, precisas e informadas para proteger nosso planeta.</p>
+            <p style="margin-top: 15px; font-size: 1.2em; font-weight: bold;">Juntos, podemos construir um futuro mais verde e sustentável! 🌿✨</p>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2026 IA Preservando a Natureza | Desenvolvido com <span class="emoji">❤️</span> para um planeta melhor</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: true, theme: 'default' });
+        mermaid.contentLoaded();
+    </script>
+</body>
+</html>
